@@ -21,3 +21,36 @@ str_split_one <- function(string, pattern, n = Inf) {
     character()
   }
 }
+
+
+#' Split a string on commas
+#'
+#' @param string A string to split
+#'
+#' @return A character vector
+#'
+#' @export
+str_split_comma <- function(string) {
+  stringr::str_split(string, pattern = ",")[[1]]
+}
+
+
+#' Split a string and convert pieces to numbers
+#'
+#' @param string A string to split
+#' @param pattern The pattern to split on
+#'
+#' @return A numeric vector
+#'
+#' @export
+str_split_nums <- function(string, pattern) {
+  pieces <- stringr::str_split(string, pattern = pattern)[[1]]
+
+  nums <- suppressWarnings(as.numeric(pieces))
+
+  if (any(is.na(nums))) {
+    warning("NAs in the vector")
+  }
+
+  nums
+}
